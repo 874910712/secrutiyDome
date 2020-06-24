@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.chen.demo.dao.LoginMapper">
+
+    <!-- 管理员登陆 -->
+    <select id="userLogin" resultMap="userResultMap">
+    SELECT user_id,user_account,user_password,user_nike
+    FROM  t_user
+    WHERE user_account = #{useraccount}
+  </select>
+
+
+
+    <resultMap type="org.chen.demo.entity.Users" id="userResultMap">
+        <result column="user_id" property="userId"/>
+        <result column="user_account" property="account"/>
+        <result column="user_password" property="password"/>
+        <result column="user_nike" property="userNike"/>
+    </resultMap>
+
+
+
+</mapper>

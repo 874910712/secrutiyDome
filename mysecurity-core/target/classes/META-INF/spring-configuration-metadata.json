@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "chen.security",
+      "type": "org.chen.mysecurity.core.properties.MySecurityProperties",
+      "sourceType": "org.chen.mysecurity.core.properties.MySecurityProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "chen.security.browser",
+      "type": "org.chen.mysecurity.core.properties.BrowserProperties",
+      "sourceType": "org.chen.mysecurity.core.properties.MySecurityProperties"
+    }
+  ],
+  "hints": []
+}
