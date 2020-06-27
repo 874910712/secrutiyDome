@@ -1,6 +1,7 @@
 package org.chen.demo.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.chen.demo.entity.MyResponse;
 import org.chen.mysecurity.core.entity.LoginResponseType;
 import org.chen.mysecurity.core.properties.MySecurityProperties;
 import org.springframework.security.core.AuthenticationException;
@@ -26,6 +27,7 @@ public class SetAuthenticationFailureHandler extends SimpleUrlAuthenticationFail
 
     @Resource
     private ObjectMapper objectMapper;
+    //自定义配置文件类
     @Resource
     private MySecurityProperties mySecurityProperties;
 
@@ -35,7 +37,8 @@ public class SetAuthenticationFailureHandler extends SimpleUrlAuthenticationFail
         if(LoginResponseType.JSON.equals(mySecurityProperties.getBrowser().getLoginResponseType())){
             response.setContentType("application/json;charset=UTF-8");
             Writer responseWriter = response.getWriter();
-            responseWriter.write(objectMapper.writeValueAsString(exception));
+            //返回错误消息
+            responseWriter.write(objectMapper.writeValueAsString(new MyResponse(exception.getMessage())));
             responseWriter.close();
         }else{
             super.onAuthenticationFailure(request, response, exception);

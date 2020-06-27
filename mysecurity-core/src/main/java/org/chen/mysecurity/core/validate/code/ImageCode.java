@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 /**
  * @ClassName: ImageCode
- * @Description: TODO
+ * @Description: 图形验证码实体类
  * @Author: chengui
  * @Date: 2020/6/27 20:48
  * @Version: 1.0
@@ -57,5 +57,10 @@ public class ImageCode {
 
     public void setExpireTime(LocalDateTime expireTime) {
         this.expireTime = expireTime;
+    }
+
+    //判断验证码是否过期
+    public boolean isExpried() {
+        return LocalDateTime.now().isAfter(expireTime);
     }
 }

@@ -13,8 +13,22 @@ import org.springframework.stereotype.Component;
  **/
 @ConfigurationProperties(prefix="chen.security")/*读取配置文件中所有以chen.security开头的配置项*/
 public class MySecurityProperties {
-
+      /*自定义浏览器配置类*/
       private BrowserProperties browser = new BrowserProperties();
+      /*自定义验证码配置类*/
+      private ValidateCodeProperties code = new ValidateCodeProperties();
+
+
+
+
+
+
+
+
+
+
+
+
 
       public BrowserProperties getBrowser() {
             return browser;
@@ -24,5 +38,11 @@ public class MySecurityProperties {
             this.browser = browser;
       }
 
+      public ValidateCodeProperties getCode() {
+            return code;
+      }
 
+      public void setCode(ValidateCodeProperties code) {
+            this.code = code;
+      }
 }
