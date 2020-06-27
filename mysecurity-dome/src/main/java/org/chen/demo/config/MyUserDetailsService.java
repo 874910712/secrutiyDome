@@ -31,7 +31,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        /*获取用户对象*/
+        /*调用DAO获取用户对象*/
         Users a = userLoginService.userLogin(username);
         /*返回userDetails对象*/
         return new User(a.getAccount(),passwordEncoder.encode(a.getPassword()),

@@ -4,6 +4,7 @@ import org.chen.demo.entity.MyResponse;
 import org.chen.mysecurity.core.properties.MySecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -36,6 +37,18 @@ public class LoginController {
 
     @Autowired
     private MySecurityProperties mySecurityProperties;
+    /*
+     * @Author:陈贵
+     * @Description：获取当前登录的用户信息
+     * @param
+     * @param null
+     * @return java.lang.Object
+     * @Date：2020/6/27 20:03
+     */
+    @RequestMapping("/getCurrentUser")
+    public Object getCurrentUser(Authentication authentication){
+        return authentication;
+    }
 
     @RequestMapping("/logintest")
     public String logintest(){

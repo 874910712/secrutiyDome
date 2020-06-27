@@ -79,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(setAuthenticationFailureHandler) /*设置使用自定义登录失败处理逻辑*/
                 .and()
                 .authorizeRequests()
-                .antMatchers("/authentication/require",mySecurityProperties.getBrowser().getLoginPage()).permitAll()/*配置放行路径*/
+                .antMatchers("/authentication/require","/getValidateCode",mySecurityProperties.getBrowser().getLoginPage()).permitAll()/*配置放行路径*/
                 .anyRequest()
                 .authenticated()
                 .and()
