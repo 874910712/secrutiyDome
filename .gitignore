@@ -20,3 +20,17 @@ mysecurity-dome/.gitignore
 mysecurity-dome/.mvn/
 mysecurity-dome/mvnw
 mysecurity-dome/mvnw.cmd
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Eclipse
+.classpath
+.project
+target
+.settings
+
+# git
+*.orig

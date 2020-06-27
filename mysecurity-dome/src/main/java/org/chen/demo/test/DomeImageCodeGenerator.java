@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @ClassName: DomeImageCodeGenerator
- * @Description: TODO
+ * @Description: 测试图片验证码生成器
  * @Author: chengui
  * @Date: 2020/6/28 0:36
  * @Version: 1.0
