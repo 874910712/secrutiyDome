@@ -121,7 +121,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .userDetailsService(userDetailsService)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/authentication/require",mySecurityProperties.getBrowser().getLoginPage(),"/getValidateCode").permitAll()/*配置放行路径*/
+                .antMatchers("/authentication/require",mySecurityProperties.getBrowser().getLoginPage(),"/code/*").permitAll()/*配置放行路径*/
                 .anyRequest()
                 .authenticated()
                 .and()

@@ -3,9 +3,12 @@ package org.chen.mysecurity.core.inter.validateCode.impl;
 import org.chen.mysecurity.core.entity.ImageCode;
 import org.chen.mysecurity.core.inter.validateCode.ValidateCodeGenerator;
 import org.chen.mysecurity.core.properties.MySecurityProperties;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
@@ -26,12 +29,13 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
     private MySecurityProperties mySecurityProperties;
 
     @Override
-    public ImageCode createImageCode(HttpServletRequest request) {
+    public ImageCode createCode(ServletWebRequest request) {
+        ServletRequest servletRequest= request.getRequest();
         /*读取图形验证码宽度、高度、字数、过期时间参数*/
-        int width = ServletRequestUtils.getIntParameter(request,"codeWidth",mySecurityProperties.getCode().getImage().getWidth());
-        int height = ServletRequestUtils.getIntParameter(request,"codeHeight",mySecurityProperties.getCode().getImage().getHeight());
-        int codeLength = ServletRequestUtils.getIntParameter(request,"codeLength",mySecurityProperties.getCode().getImage().getLength());
-        int expireIn = ServletRequestUtils.getIntParameter(request,"codeExpireIn",mySecurityProperties.getCode().getImage().getExpireIn());
+        int width = ServletRequestUtils.getIntParameter(servletRequest,"codeWidth",mySecurityProperties.getCode().getImage().getWidth());
+        int height = ServletRequestUtils.getIntParameter(servletRequest,"codeHeight",mySecurityProperties.getCode().getImage().getHeight());
+        int codeLength = ServletRequestUtils.getIntParameter(servletRequest,"codeLength",mySecurityProperties.getCode().getImage().getLength());
+        int expireIn = ServletRequestUtils.getIntParameter(servletRequest,"codeExpireIn",mySecurityProperties.getCode().getImage().getExpireIn());
 
         String[] arr = {"1","2","3","4","5","6","7","8","9","0"};
         String code = "";
@@ -40,7 +44,7 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
             code += arr[random.nextInt(arr.length)];
         }
         // 生成验证码后，需要保存验证码
-        HttpSession session = request.getSession();
+        HttpSession session = request.getRequest().getSession();
         session.setAttribute("code", code);
         // 绘制图片
         // 参数：图片的宽和高

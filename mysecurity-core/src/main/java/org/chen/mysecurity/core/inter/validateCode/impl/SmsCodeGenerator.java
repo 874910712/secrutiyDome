@@ -8,6 +8,7 @@ import org.chen.mysecurity.core.inter.validateCode.ValidateCodeGenerator;
 import org.chen.mysecurity.core.properties.MySecurityProperties;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ public class SmsCodeGenerator implements ValidateCodeGenerator {
     private MySecurityProperties mySecurityProperties;
 
     @Override
-    public ValidateCode createImageCode(HttpServletRequest request) {
+    public ValidateCode createCode(ServletWebRequest request) {
         //根据配置文件生成位随机数
        String code = RandomStringUtils.randomNumeric(mySecurityProperties.getCode().getSmsCode().getLength());
        

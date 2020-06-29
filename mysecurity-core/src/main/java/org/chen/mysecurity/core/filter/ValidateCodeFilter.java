@@ -2,6 +2,8 @@ package org.chen.mysecurity.core.filter;
 
 import org.apache.commons.lang.StringUtils;
 import org.chen.mysecurity.core.entity.ImageCode;
+import org.chen.mysecurity.core.inter.validateCode.AbstractValidateCodeProcessor;
+import org.chen.mysecurity.core.inter.validateCode.ValidateCodeProcessor;
 import org.chen.mysecurity.core.properties.MySecurityProperties;
 import org.chen.mysecurity.core.properties.controller.ValidateCodeController;
 import org.chen.mysecurity.core.exception.ValidateCodeException;
@@ -109,8 +111,9 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
      * @Date：2020/6/27 22:24
      */
     private void validate(ServletWebRequest request) throws ServletRequestBindingException {
+        String codeType = StringUtils.substringAfter(request.getRequest().getRequestURI(),"/code/");
         //从Session中获取验证码
-        ImageCode sessionCode = (ImageCode) sessionStrategy.getAttribute(request, ValidateCodeController.SESSION_KEY);
+        ImageCode sessionCode = (ImageCode) sessionStrategy.getAttribute(request, ValidateCodeProcessor.SESSION_KEY_PREFIX+codeType);
         //从请求中获取用户输入验证码
         String requestCode = ServletRequestUtils.getStringParameter(request.getRequest(),"imageCode");
         if(StringUtils.isBlank(requestCode)){
@@ -121,7 +124,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
         }
         //如果验证码过期
         if(sessionCode.isExpried()){
-            sessionStrategy.removeAttribute(request,ValidateCodeController.SESSION_KEY);
+            sessionStrategy.removeAttribute(request,ValidateCodeProcessor.SESSION_KEY_PREFIX+codeType);
             throw new ValidateCodeException("验证码已过期！");
         }
 
@@ -129,7 +132,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
             throw new ValidateCodeException("输入的验证码有误！");
         }
         //移除验证码
-        sessionStrategy.removeAttribute(request,ValidateCodeController.SESSION_KEY);
+        sessionStrategy.removeAttribute(request,ValidateCodeProcessor.SESSION_KEY_PREFIX+codeType);
 
     }
 
