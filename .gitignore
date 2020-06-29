@@ -34,3 +34,8 @@ target
 
 # git
 *.orig
+mysecurity-core/src/main/resources/
+mysecurity-core/src/test/
+mysecurity-dome/src/main/resources/static/
+mysecurity-dome/src/main/resources/templates/
+/mysecurity-core/target/

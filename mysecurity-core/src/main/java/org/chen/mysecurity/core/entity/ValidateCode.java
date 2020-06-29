@@ -1,4 +1,4 @@
-package org.chen.mysecurity.core.validate.code;
+package org.chen.mysecurity.core.entity;
 
 import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
  * @Date: 2020/6/27 20:48
  * @Version: 1.0
  **/
-public class ImageCode {
-    private BufferedImage image;//验证码图片对象
+public class ValidateCode {
     private String code;//
     private LocalDateTime expireTime;//过期时间
 
@@ -23,24 +22,14 @@ public class ImageCode {
      * @return
      * @Date：2020/6/27 20:51
      */
-    public ImageCode(BufferedImage image, String code, int expireTime) {
-        this.image = image;
+    public ValidateCode(String code, int expireTime) {
         this.code = code;
         this.expireTime = LocalDateTime.now().plusSeconds(expireTime);
     }
 
-    public ImageCode(BufferedImage image, String code, LocalDateTime expireTime) {
-        this.image = image;
+    public ValidateCode(String code, LocalDateTime expireTime) {
         this.code = code;
         this.expireTime = expireTime;
-    }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
     }
 
     public String getCode() {

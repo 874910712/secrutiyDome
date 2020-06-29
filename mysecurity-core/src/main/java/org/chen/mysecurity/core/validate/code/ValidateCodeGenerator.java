@@ -1,6 +1,6 @@
 package org.chen.mysecurity.core.validate.code;
 
-import org.springframework.stereotype.Component;
+import org.chen.mysecurity.core.entity.ImageCode;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -6,6 +6,8 @@ import org.chen.demo.service.UserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * @ClassName: UserLoginServiceImpl
  * @Description: TODO
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserLoginServiceImpl implements UserLoginService {
 
-    @Autowired
+    @Resource
     private LoginMapper loginMapper;
 
     @Override

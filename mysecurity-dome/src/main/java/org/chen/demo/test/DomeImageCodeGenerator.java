@@ -1,8 +1,7 @@
 package org.chen.demo.test;
 
-import org.chen.mysecurity.core.validate.code.ImageCode;
+import org.chen.mysecurity.core.entity.ImageCode;
 import org.chen.mysecurity.core.validate.code.ValidateCodeGenerator;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
  * @Date: 2020/6/28 0:36
  * @Version: 1.0
  **/
-@Component("imageCodeGenerator")
 public class DomeImageCodeGenerator implements ValidateCodeGenerator {
 
 

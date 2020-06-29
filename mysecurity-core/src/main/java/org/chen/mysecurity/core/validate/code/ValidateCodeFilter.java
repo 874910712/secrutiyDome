@@ -1,11 +1,9 @@
 package org.chen.mysecurity.core.validate.code;
 
-import jdk.nashorn.internal.ir.RuntimeNode;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.Validate;
+import org.chen.mysecurity.core.entity.ImageCode;
 import org.chen.mysecurity.core.properties.MySecurityProperties;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
@@ -15,10 +13,8 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -49,11 +45,15 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
-        //获取配置文件里的所有url路径
-        String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(mySecurityProperties.getCode().getImage().getUrl(),",");
-        for (String url:configUrls){
-            urls.add(url);
+        String userConfigUrls = mySecurityProperties.getCode().getImage().getUrl();
+        if(StringUtils.isNotEmpty(userConfigUrls)){
+            //获取配置文件里的所有url路径
+            String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(userConfigUrls,",");
+            for (String url:configUrls){
+                urls.add(url);
+            }
         }
+
         //添加默认的登录请求路径
         urls.add("/authentication/form");
 

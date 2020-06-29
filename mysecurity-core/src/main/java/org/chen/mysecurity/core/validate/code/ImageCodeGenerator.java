@@ -1,5 +1,6 @@
 package org.chen.mysecurity.core.validate.code;
 
+import org.chen.mysecurity.core.entity.ImageCode;
 import org.chen.mysecurity.core.properties.MySecurityProperties;
 import org.springframework.web.bind.ServletRequestUtils;
 

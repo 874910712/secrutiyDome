@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 
 /**
  * @ClassName: MyUserDetailsService
- * @Description: TODO
+ * @Description: 登录
  * @Author: chengui
  * @Date: 2020/6/21 23:12
  * @Version: 1.0
