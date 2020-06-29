@@ -5,13 +5,13 @@ import java.time.LocalDateTime;
 
 /**
  * @ClassName: ImageCode
- * @Description: 图形验证码实体类
+ * @Description: 验证码实体父类
  * @Author: chengui
  * @Date: 2020/6/27 20:48
  * @Version: 1.0
  **/
 public class ValidateCode {
-    private String code;//
+    private String code;//验证码
     private LocalDateTime expireTime;//过期时间
 
     /*

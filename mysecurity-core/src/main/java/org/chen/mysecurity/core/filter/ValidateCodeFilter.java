@@ -1,8 +1,10 @@
-package org.chen.mysecurity.core.validate.code;
+package org.chen.mysecurity.core.filter;
 
 import org.apache.commons.lang.StringUtils;
 import org.chen.mysecurity.core.entity.ImageCode;
 import org.chen.mysecurity.core.properties.MySecurityProperties;
+import org.chen.mysecurity.core.properties.controller.ValidateCodeController;
+import org.chen.mysecurity.core.exception.ValidateCodeException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
@@ -108,7 +110,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
      */
     private void validate(ServletWebRequest request) throws ServletRequestBindingException {
         //从Session中获取验证码
-        ImageCode sessionCode = (ImageCode) sessionStrategy.getAttribute(request,ValidateCodeController.SESSION_KEY);
+        ImageCode sessionCode = (ImageCode) sessionStrategy.getAttribute(request, ValidateCodeController.SESSION_KEY);
         //从请求中获取用户输入验证码
         String requestCode = ServletRequestUtils.getStringParameter(request.getRequest(),"imageCode");
         if(StringUtils.isBlank(requestCode)){

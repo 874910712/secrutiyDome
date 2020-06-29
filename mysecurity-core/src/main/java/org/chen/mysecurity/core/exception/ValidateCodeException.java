@@ -1,4 +1,4 @@
-package org.chen.mysecurity.core.validate.code;
+package org.chen.mysecurity.core.exception;
 
 
 import org.springframework.security.core.AuthenticationException;

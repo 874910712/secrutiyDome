@@ -1,12 +1,9 @@
 package org.chen.demo.config;
 
-import org.chen.demo.authentication.MyAuthenticationFailureHandler;
-import org.chen.demo.authentication.MyAuthenticationSuccessHandler;
 import org.chen.demo.authentication.SetAuthenticationFailureHandler;
 import org.chen.demo.authentication.SetAuthenticationSuccessHandler;
 import org.chen.mysecurity.core.properties.MySecurityProperties;
-import org.chen.mysecurity.core.validate.code.ValidateCodeFilter;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.chen.mysecurity.core.filter.ValidateCodeFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,7 +17,6 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.annotation.Resource;
-import javax.servlet.Filter;
 import javax.sql.DataSource;
 
 /**

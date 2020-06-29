@@ -11,9 +11,8 @@ import java.time.LocalDateTime;
  * @Version: 1.0
  **/
 public class ImageCode extends ValidateCode {
+
     private BufferedImage image;//验证码图片对象
-    private String code;//
-    private LocalDateTime expireTime;//过期时间
 
     /*
      * @Author:陈贵

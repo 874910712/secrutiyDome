@@ -1,8 +1,11 @@
-package org.chen.mysecurity.core.properties;
+package org.chen.mysecurity.core.config;
 
-import org.chen.mysecurity.core.validate.code.ImageCodeGenerator;
-import org.chen.mysecurity.core.validate.code.ValidateCodeGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.chen.mysecurity.core.entity.ValidateCode;
+import org.chen.mysecurity.core.inter.validateCode.SmsValidateCodeSender;
+import org.chen.mysecurity.core.inter.validateCode.impl.DefaultSmsValidateCodeSender;
+import org.chen.mysecurity.core.inter.validateCode.impl.ImageCodeGenerator;
+import org.chen.mysecurity.core.inter.validateCode.ValidateCodeGenerator;
+import org.chen.mysecurity.core.properties.MySecurityProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +35,15 @@ public class ValidateCodeBeanConfig {
 
         return codeGenerator;
     }
+
+    @Bean//生成的bean类默认名和方法名相同
+    @ConditionalOnMissingBean(name = "smsCodeSender")//这个注解代表只有在spring中不存在名字为imageCodeGenerator的bean时才调用这段代码
+    public SmsValidateCodeSender smsValidateCodeSender(){
+
+         return new DefaultSmsValidateCodeSender();
+    }
+
+
 
 
 }

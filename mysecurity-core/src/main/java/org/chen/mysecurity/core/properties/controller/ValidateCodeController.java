@@ -1,8 +1,13 @@
-package org.chen.mysecurity.core.validate.code;
+package org.chen.mysecurity.core.properties.controller;
 
 import org.chen.mysecurity.core.entity.ImageCode;
+import org.chen.mysecurity.core.entity.ValidateCode;
+import org.chen.mysecurity.core.inter.validateCode.SmsValidateCodeSender;
+import org.chen.mysecurity.core.inter.validateCode.ValidateCodeGenerator;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
+import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -34,6 +39,9 @@ public class ValidateCodeController {
     private ValidateCodeGenerator imageCodeGenerator;
     @Resource
     private ValidateCodeGenerator smsValidateCodeGenerator;
+    //注入短信验证码发送实现类
+    @Resource
+    private SmsValidateCodeSender smsValidateCodeSender;
 
 
     /*
@@ -48,15 +56,28 @@ public class ValidateCodeController {
     public void createCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
 //         ImageCode imageCode = createImageCode(request);
         //调用自定义生成图形验证码接口
-         ImageCode imageCode = imageCodeGenerator.createImageCode(request);
+         ImageCode imageCode = (ImageCode) imageCodeGenerator.createImageCode(request);
          //将验证码存放到session中
          sessionStrategy.setAttribute(new ServletWebRequest(request),SESSION_KEY,imageCode);
          ImageIO.write(imageCode.getImage(),"JPEG",response.getOutputStream());
     }
-
+    /**
+     * @Author:陈贵
+     * @Description： 生成短信验证码
+     * @param
+     * @param null
+     * @return void
+     * @Date：2020/6/29 21:22
+     */
     @GetMapping("/getSmsValidateCode")
-    public void createSmsValidateCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
-          
+    public void createSmsValidateCode(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletRequestBindingException {
+        //调用自定义生成图形验证码接口
+        ValidateCode imageCode = imageCodeGenerator.createImageCode(request);
+        //将验证码存放到session中
+        sessionStrategy.setAttribute(new ServletWebRequest(request),SESSION_KEY,imageCode);
+        String phoneNum = ServletRequestUtils.getRequiredStringParameter(request,"phoneNum");
+        //调用短信发送接口
+        smsValidateCodeSender.sendRequestGetCode(phoneNum,"1234");
     }
 
 

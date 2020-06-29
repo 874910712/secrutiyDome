@@ -1,6 +1,7 @@
-package org.chen.mysecurity.core.validate.code;
+package org.chen.mysecurity.core.inter.validateCode;
 
 import org.chen.mysecurity.core.entity.ImageCode;
+import org.chen.mysecurity.core.entity.ValidateCode;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface ValidateCodeGenerator {
 
     //生成图形验证码的方法
-    ImageCode createImageCode(HttpServletRequest request);
+    ValidateCode createImageCode(HttpServletRequest request);
 
 
 }

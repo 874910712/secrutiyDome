@@ -1,6 +1,7 @@
-package org.chen.mysecurity.core.validate.code;
+package org.chen.mysecurity.core.inter.validateCode.impl;
 
 import org.chen.mysecurity.core.entity.ImageCode;
+import org.chen.mysecurity.core.inter.validateCode.ValidateCodeGenerator;
 import org.chen.mysecurity.core.properties.MySecurityProperties;
 import org.springframework.web.bind.ServletRequestUtils;
 
@@ -13,7 +14,7 @@ import java.util.Random;
 
 /**
  * @ClassName: ImageCodeGenerator
- * @Description: TODO
+ * @Description: 图形验证码生成类
  * @Author: chengui
  * @Date: 2020/6/28 0:17
  * @Version: 1.0

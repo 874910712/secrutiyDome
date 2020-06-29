@@ -1,7 +1,7 @@
 package org.chen.demo.test;
 
 import org.chen.mysecurity.core.entity.ImageCode;
-import org.chen.mysecurity.core.validate.code.ValidateCodeGenerator;
+import org.chen.mysecurity.core.inter.validateCode.ValidateCodeGenerator;
 
 import javax.servlet.http.HttpServletRequest;
 
